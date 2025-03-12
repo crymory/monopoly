@@ -1,405 +1,422 @@
 :root {
-    --primary-color: #4CAF50;
-    --light-color: #f5f5f5;
-    --border-color: #ccc;
-    --text-color: #333;
-    --player1-color: #e74c3c;
-    --player2-color: #3498db;
-    
-    /* Цвета для групп компаний */
-    --property-color1: #8B4513; /* Продукты питания - коричневый */
-    --property-color2: #87CEEB; /* IT компании - голубой */
-    --property-color3: #FF69B4; /* Мода и красота - розовый */
-    --property-color4: #FFA500; /* Автопром - оранжевый */
-    --property-color5: #FF0000; /* Напитки - красный */
-    --property-color6: #FFFF00; /* Развлечения - желтый */
-    --property-color7: #008000; /* Банки и финансы - зеленый */
-    --property-color8: #4B0082; /* Люксовые бренды - фиолетовый */
-}
+            --primary-color: #1b5e20;
+            --secondary-color: #b71c1c;
+            --light-color: #e8f5e9;
+            --dark-color: #1a1a1a;
+            --border-color: #4a4a4a;
+            --player1-color: #2196f3;
+            --player2-color: #f44336;
+            --property-color1: #f44336;
+            --property-color2: #ff9800;
+            --property-color3: #ffeb3b;
+            --property-color4: #4caf50;
+            --property-color5: #2196f3;
+            --property-color6: #9c27b0;
+            --property-color7: #795548;
+            --property-color8: #ff5722;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-body {
-    background-color: var(--light-color);
-    color: var(--text-color);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+        body {
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Контейнеры */
-.login-container, .game-container {
-    width: 100%;
-    max-width: 1200px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin: 0 auto;
-}
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.login-container {
-    padding: 40px;
-    text-align: center;
-}
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.player-selection {
-    margin-top: 40px;
-}
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
 
-.player-button {
-    padding: 15px 30px;
-    margin: 20px 10px;
-    font-size: 18px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .game-area {
+            display: flex;
+            flex: 1;
+            gap: 20px;
+        }
 
-.player-button:hover {
-    background-color: #3e8e41;
-}
+        .board-container {
+            flex: 3;
+            position: relative;
+            min-height: 600px;
+        }
 
-.player-id {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 10px 0;
-    text-align: center;
-    font-weight: bold;
-}
+        .board {
+            display: grid;
+            grid-template-columns: repeat(11, 1fr);
+            grid-template-rows: repeat(11, 1fr);
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            background-color: var(--light-color);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
 
-/* Заголовок */
-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 15px;
-    text-align: center;
-}
+        .cell {
+            border: 1px solid var(--border-color);
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
 
-/* Игровая область */
-.game-area {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
+        .cell:hover {
+            background-color: #f5f5f5;
+            transform: scale(1.03);
+            z-index: 10;
+        }
 
-@media (min-width: 992px) {
-    .game-area {
-        flex-direction: row;
-    }
-}
+        .cell-title {
+            font-weight: bold;
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
 
-/* Игровое поле */
-.board-container {
-    position: relative;
-    margin-bottom: 20px;
-}
+        .cell-price {
+            font-size: 10px;
+            color: #555;
+        }
 
-.board {
-    width: 100%;
-    aspect-ratio: 1/1;
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    grid-template-rows: repeat(11, 1fr);
-    border: 2px solid var(--border-color);
-    background-color: var(--light-color);
-}
+        .color-strip {
+            width: 100%;
+            height: 10px;
+            margin-bottom: 2px;
+        }
 
-.cell {
-    border: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5px;
-    font-size: 0.7em;
-    background-color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .side-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-.cell:hover {
-    background-color: #f0f0f0;
-}
+        .player-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.color-strip {
-    width: 100%;
-    height: 5px;
-    margin-bottom: 3px;
-}
+        .player-info {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
 
-.cell-title {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 2px;
-}
+        .player-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
 
-.cell-price {
-    font-size: 0.85em;
-    text-align: center;
-}
+        .player-money {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
 
-/* Фишки игроков */
-.player-token {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    z-index: 2;
-}
+        .player1 {
+            border-left: 5px solid var(--player1-color);
+        }
 
-.player1-token {
-    background-color: var(--player1-color);
-}
+        .player2 {
+            border-left: 5px solid var(--player2-color);
+        }
 
-.player2-token {
-    background-color: var(--player2-color);
-}
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
 
-/* Боковая панель */
-.side-panel {
-    flex: 1;
-    padding: 0 20px;
-}
+        button {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-/* Информация об игроках */
-.player-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
+        button:hover {
+            background-color: #0d3911;
+            transform: translateY(-2px);
+        }
 
-.player-info {
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    width: 48%;
-}
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: translateY(0);
+        }
 
-.player1 {
-    background-color: rgba(231, 76, 60, 0.1);
-    border: 2px solid var(--player1-color);
-}
+        .roll-dice {
+            background-color: var(--primary-color);
+            font-size: 1.1rem;
+        }
 
-.player2 {
-    background-color: rgba(52, 152, 219, 0.1);
-    border: 2px solid var(--player2-color);
-}
+        .end-turn {
+            background-color: var(--secondary-color);
+        }
 
-.player-name {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+        .buy-property {
+            background-color: #1565c0;
+        }
 
-.player-money {
-    font-size: 1.2em;
-}
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
 
-/* Элементы управления */
-.controls {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
+        .dice {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
 
-button {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
+        .log-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            max-height: 150px;
+            overflow-y: auto;
+        }
 
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+        .log-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
 
-.roll-dice {
-    background-color: var(--primary-color);
-    color: white;
-}
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
 
-.roll-dice:hover:not(:disabled) {
-    background-color: #3e8e41;
-}
+        .player-token {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 20;
+            transition: all 0.5s ease;
+        }
 
-.buy-property {
-    background-color: #e74c3c;
-    color: white;
-}
+        .player1-token {
+            background-color: var(--player1-color);
+            border: 2px solid white;
+        }
 
-.buy-property:hover:not(:disabled) {
-    background-color: #c0392b;
-}
+        .player2-token {
+            background-color: var(--player2-color);
+            border: 2px solid white;
+        }
 
-.end-turn {
-    background-color: #3498db;
-    color: white;
-}
+        .property-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
 
-.end-turn:hover:not(:disabled) {
-    background-color: #2980b9;
-}
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
 
-/* Кубики */
-.dice-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-.dice {
-    width: 40px;
-    height: 40px;
-    margin: 0 5px;
-    background-color: white;
-    border: 2px solid var(--border-color);
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5em;
-    font-weight: bold;
-}
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
 
-/* Игровой лог */
-.log-container {
-    margin-top: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    overflow: hidden;
-}
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
 
-.log-title {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-}
+        .property-details {
+            margin-bottom: 20px;
+        }
 
-#gameLog {
-    height: 200px;
-    overflow-y: auto;
-    padding: 10px;
-    background-color: white;
-}
+        .property-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
 
-.log-entry {
-    margin-bottom: 5px;
-    padding: 5px;
-    border-bottom: 1px solid #eee;
-}
+        .property-price {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
 
-/* Модальные окна */
-.property-modal, .winner-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
+        .property-rent {
+            margin-bottom: 5px;
+        }
 
-.modal-content, .winner-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-}
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
+        .winner-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 110;
+        }
 
-.modal-title, .winner-title {
-    font-size: 1.5em;
-    font-weight: bold;
-}
+        .winner-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
-.close-modal {
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-}
+        .winner-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
 
-.property-details {
-    margin-bottom: 20px;
-}
+        .winner-message {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
 
-.property-name {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        .restart-game {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: var(--primary-color);
+        }
 
-.property-price, .property-rent, .property-owner {
-    margin-bottom: 5px;
-}
+        @media (max-width: 1100px) {
+            .game-area {
+                flex-direction: column;
+            }
+            
+            .board-container {
+                min-height: 500px;
+            }
+            
+            .board {
+                min-height: 500px;
+            }
+            
+            .cell {
+                font-size: 10px;
+            }
+            
+            .cell-title {
+                font-size: 8px;
+            }
+            
+            .cell-price {
+                font-size: 8px;
+            }
+        }
 
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.modal-actions button {
-    margin-left: 10px;
-}
-
-.winner-message {
-    font-size: 1.2em;
-    margin: 20px 0;
-    text-align: center;
-}
-
-.restart-game {
-    width: 100%;
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.restart-game:hover {
-    background-color: #3e8e41;
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-    .game-area {
-        flex-direction: column;
-    }
-    
-    .board {
-        font-size: 0.6em;
-    }
-    
-    .player-container {
-        flex-direction: column;
-    }
-    
-    .player-info {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}
+        @media (max-width: 768px) {
+            .board-container {
+                min-height: 400px;
+            }
+            
+            .board {
+                min-height: 400px;
+            }
+            
+            .cell {
+                padding: 2px;
+                font-size: 8px;
+            }
+            
+            .cell-title {
+                font-size: 6px;
+            }
+            
+            .cell-price {
+                font-size: 6px;
+            }
+            
+            .color-strip {
+                height: 5px;
+            }
+        }
