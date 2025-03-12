@@ -30,11 +30,15 @@
     font-family: 'Roboto', 'Segoe UI', 'Arial', sans-serif;
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 body {
     background-color: #fafafa;
-    height: 100vh;
     display: flex;
-    overflow: hidden;
     color: var(--dark-color);
 }
 
@@ -42,8 +46,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
-    max-width: 100%;
+    height: 100%;
     margin: 0 auto;
     padding: 10px;
 }
@@ -70,15 +73,15 @@ h1 {
     display: flex;
     flex: 1;
     gap: 15px;
-    height: calc(100vh - 70px);
-    overflow: hidden;
+    min-height: 0; /* Важно для flex container */
+    height: calc(100% - 60px); /* Высота контейнера минус высота заголовка */
 }
 
 .board-container {
     flex: 2;
     position: relative;
-    height: 100%;
-    min-height: 0;
+    min-height: 0; /* Важно для flex-child */
+    display: flex; /* Добавлено */
 }
 
 .board {
@@ -140,7 +143,8 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 100%;
+    min-height: 0; /* Важно для flex-child */
+    max-width: 350px; /* Ограничиваем ширину панели */
     overflow-y: auto;
     padding-right: 5px;
 }
@@ -280,7 +284,6 @@ button:disabled {
     box-shadow: var(--box-shadow);
     flex: 1;
     min-height: 100px;
-    max-height: 30%;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--primary-color) #f0f0f0;
@@ -521,15 +524,16 @@ button:disabled {
 @media (max-width: 992px) {
     .game-area {
         flex-direction: column;
-        height: calc(100vh - 60px);
     }
     
     .board-container {
-        height: 60vh;
+        height: 60%;
+        min-height: 350px;
     }
     
     .side-panel {
-        height: 40vh;
+        height: 40%;
+        max-width: none;
         flex-direction: row;
         overflow-x: auto;
         overflow-y: hidden;
@@ -538,7 +542,7 @@ button:disabled {
     .player-container, .controls, .log-container {
         flex: 1;
         min-width: 250px;
-        max-height: none;
+        height: auto;
     }
     
     .log-container {
@@ -627,7 +631,8 @@ button:disabled {
     }
     
     .board-container {
-        height: 50vh;
+        height: 50%;
+        min-height: 300px;
     }
     
     .player-container, .controls, .log-container {
@@ -657,4 +662,10 @@ button:disabled {
     50% { transform: rotate(-15deg); }
     75% { transform: rotate(5deg); }
     100% { transform: rotate(0deg); }
+}
+
+/* Убедимся, что все ячейки доски видны */
+.board > * {
+    min-width: 0;
+    min-height: 0;
 }
