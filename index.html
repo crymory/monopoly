@@ -1,25 +1,16 @@
+ 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бизнес-Монополия</title>
+    <title>Монополия для двоих</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="login-container" id="loginContainer">
-        <h1>Бизнес-Монополия</h1>
-        <div class="player-selection">
-            <h2>Выберите игрока:</h2>
-            <button class="player-button" onclick="selectPlayer(1)">Игрок 1</button>
-            <button class="player-button" onclick="selectPlayer(2)">Игрок 2</button>
-        </div>
-    </div>
-
-    <div class="game-container" id="gameContainer" style="display: none;">
+    <div class="game-container">
         <header>
-            <h1>Бизнес-Монополия</h1>
-            <div class="player-id">Вы играете за: <span id="currentPlayerLabel">Игрок 1</span></div>
+            <h1>Монополия для двоих</h1>
         </header>
         
         <div class="game-area">
@@ -47,7 +38,7 @@
                         <div class="dice" id="dice1">-</div>
                         <div class="dice" id="dice2">-</div>
                     </div>
-                    <button class="buy-property" id="buyPropertyBtn" disabled>Купить компанию</button>
+                    <button class="buy-property" id="buyPropertyBtn" disabled>Купить недвижимость</button>
                     <button class="end-turn" id="endTurnBtn" disabled>Завершить ход</button>
                 </div>
                 
@@ -62,11 +53,11 @@
     <div class="property-modal" id="propertyModal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">Информация о компании</div>
+                <div class="modal-title">Информация о собственности</div>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="property-details">
-                <div class="property-name" id="modalPropertyName">Название компании</div>
+                <div class="property-name" id="modalPropertyName">Название недвижимости</div>
                 <div class="property-price" id="modalPropertyPrice">Цена: ₽0</div>
                 <div class="property-rent" id="modalPropertyRent">Аренда: ₽0</div>
                 <div class="property-owner" id="modalPropertyOwner">Владелец: Нет</div>
@@ -86,6 +77,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+   <script src="script.js"></script>
 </body>
 </html>
